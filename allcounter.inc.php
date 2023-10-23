@@ -1,5 +1,8 @@
 <?php
-function plugin_counter_inline() {
+// $Id: allcounter.inc.php,v 1.0 2023/10/23 18:14:00 WikiChree.COM Team Exp $
+// License: GPL v3 or (at your option) any later version
+
+function plugin_allcounter_inline() {
     if (!exist_plugin("counter")) 
         return "Not found counter plugin";
     
