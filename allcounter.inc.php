@@ -14,13 +14,13 @@ function plugin_allcounter_inline() {
         case 'today':
         case 'yesterday':
             $total = 0;
-            $extlen = strlen(COUNTER_EXT);
+            $extlen = strlen(PLUGIN_COUNTER_SUFFIX);
             if($dh = opendir(COUNTER_DIR)) {
                 while (($file = readdir($dh)) !== false) {
                     $fileName = substr($file, 0, strlen($file)-$extlen);
                     $ext = substr($file, strlen($file)-$extlen, $extlen);
         
-                    if(strcmp($ext, COUNTER_EXT) == 0) {
+                    if(strcmp($ext, PLUGIN_COUNTER_SUFFIX) == 0) {
                         $pageName = decode($fileName);
                         $counter = plugin_allcounter_get_count($pageName);
                         $total += intval($counter[$arg]);
