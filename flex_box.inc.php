@@ -19,10 +19,10 @@ if (! defined('PLUGIN_FLEX_JUSTIFY')) {
 
 if (! defined('PLUGIN_FLEX_STYLE')) {
 	define('PLUGIN_FLEX_STYLE', <<<'EOD'
-.wikic-flex{display:flex;flex-wrap:wrap;box-sizing:border-box;width:100%;margin:.5em 0}
-.wikic-flex-nowrap{flex-wrap:nowrap}
-.wikic-flex>.wikic-flex-box{flex:0 1 var(--wikic-flex-basis,auto);min-width:0;box-sizing:border-box;padding:.25em .5em}
-.wikic-flex-stretch>.wikic-flex-box{flex-grow:1}
+.flex_container{display:flex;flex-wrap:wrap;box-sizing:border-box;width:100%;margin:.5em 0}
+.flex_container_nowrap{flex-wrap:nowrap}
+.flex_container>.flex_box{flex:0 1 var(--flex-basis,auto);min-width:0;box-sizing:border-box;padding:.25em .5em}
+.flex_container_stretch>.flex_box{flex-grow:1}
 EOD
 	);
 }
@@ -79,7 +79,7 @@ function plugin_flex_box_convert() {
 
 	plugin_flex_add_style();
 
-	return '<div class="wikic-flex-box"' . $style . '>' . "\n"
+	return '<div class="flex_box"' . $style . '>' . "\n"
 		. convert_html(str_replace("\r", "\n", $body))
 		. '</div>' . "\n";
 }

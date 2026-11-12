@@ -18,13 +18,15 @@
 define('PLUGIN_FOLD_DEFAULT_TITLE', 'もっと見る');
 
 define('PLUGIN_FOLD_STYLE', <<<'EOD'
-.wikic-fold{display:block;box-sizing:border-box;width:100%;margin:.5em 0;border:1px solid rgba(128,128,128,.35);border-radius:6px}
-.wikic-fold>summary{display:flex;align-items:center;gap:.5em;padding:.5em .8em;cursor:pointer;font-weight:600;list-style:none;user-select:none}
-.wikic-fold>summary::-webkit-details-marker{display:none}
-.wikic-fold>summary::before{content:"";flex:none;width:.45em;height:.45em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
-.wikic-fold[open]>summary::before{transform:rotate(45deg)}
-.wikic-fold>summary:hover{background:rgba(128,128,128,.08)}
-.wikic-fold-body{min-width:0;padding:.4em .9em .8em;border-top:1px solid rgba(128,128,128,.25)}
+.fold{display:block;box-sizing:border-box;width:100%;margin:.4em 0}
+.fold>summary{-webkit-user-select:none;user-select:none;display:flex;align-items:center;gap:.5em;min-height:1.6em;cursor:pointer;list-style:none}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::before{content:"+";flex:none;box-sizing:border-box;width:1.6em;height:1.6em;display:inline-flex;align-items:center;justify-content:center;border:1px solid gray;border-radius:3px;color:gray;font:normal 1em/1 monospace}
+.fold[open]>summary::before{content:"-"}
+.fold[open]{min-height:1.6em}
+.fold[open]>summary>.fold_label{display:none}
+.fold_body{display:flow-root;min-width:0;margin:-1.6em 0 0 2.1em}
+.fold_body>:first-child{margin-top:0}
 EOD
 );
 
@@ -70,8 +72,8 @@ function plugin_fold_convert()
 		$head_tags[] = '<style>' . PLUGIN_FOLD_STYLE . '</style>';
 	}
 
-	return '<details class="wikic-fold"' . ($open ? ' open' : '') . '>'
-		. '<summary>' . $title_html . '</summary>'
-		. '<div class="wikic-fold-body">' . $body_html . '</div>'
+	return '<details class="fold"' . ($open ? ' open' : '') . '>'
+		. '<summary><span class="fold_label">' . $title_html . '</span></summary>'
+		. '<div class="fold_body">' . $body_html . '</div>'
 		. '</details>' . "\n";
 }
